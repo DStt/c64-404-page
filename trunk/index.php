@@ -5,10 +5,6 @@
 		$pageurl .= "?" . $_SERVER[REDIRECT_QUERY_STRING];
 	}
 
-	if (preg_match("/\/site2\//",$pageurl)) {
-		header("Location:http://www.xklub.dk"); 
-		exit;
-	}
 
 ?>
 
