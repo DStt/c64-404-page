@@ -5,7 +5,6 @@
 		$pageurl .= "?" . $_SERVER[REDIRECT_QUERY_STRING];
 	}
 
-
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -101,8 +100,14 @@
 		var elid='i' + textidx;
 		var el = document.getElementById(elid);
 		var addwidth = movecursor ? fontwidth : 0 ;
-		var curleft = el.offsetLeft +addwidth;;
-		var curtop = el.offsetTop;
+
+		var posarr = findPos (el);
+		
+		// var curleft = el.offsetLeft +addwidth;;
+		// var curtop = el.offsetTop;
+		var curleft = posarr[0]+addwidth;
+		var curtop = posarr[1];
+
 		if (curleft > 1000) { alert (curleft); }
 
 
@@ -117,7 +122,7 @@
 			
 			if (typing) {
 				if (randx(10) > 7) {
-					rand=randx(500);
+					rand=randx(700);
 				} else {
 					rand=randx(200);
 				}
@@ -142,6 +147,21 @@
 
 		}
 	}
+
+	function findPos(obj) {
+		var fcurleft = fcurtop = 0;
+		if (obj.offsetParent) {
+			fcurleft = obj.offsetLeft
+			fcurtop = obj.offsetTop
+			while (obj = obj.offsetParent) {
+				fcurleft += obj.offsetLeft
+				fcurtop += obj.offsetTop
+			}
+		}
+
+		return [fcurleft,fcurtop];
+	}
+
 
 	function flipcursor(nosettime) {
 
